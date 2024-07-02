@@ -4,6 +4,7 @@ const {body, validationResult} = require('express-validator')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
+const path = require('path');
 
 // init app
 const app = express()
@@ -12,6 +13,9 @@ const port = 3000
 //ejs and express-ejs-layouts for view engine and layouts
 app.set('view engine', 'ejs')
 app.use(expressLayouts)
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 //built-in middleware
 app.use(express.static('public'))
@@ -35,7 +39,7 @@ app.get('/', (req, res) => {
     res.render('index', {
         name: 'home',
         title: "Halaman Home",
-        layout: 'layouts/main-layout' 
+        layout: 'index' 
     })
 })
 
